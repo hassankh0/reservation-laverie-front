@@ -14,11 +14,11 @@ function NavBar() {
                         <li className="nav-item active">
                             <a className="nav-link" href="home">Home</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="feedback">Feedback</a>
-                        </li>
                         <li claclassNamess="nav-item">
                             <a className="nav-link" href="reservation">Reservation</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="feedback">Feedback</a>
                         </li>
                     </ul>
                 </div>
