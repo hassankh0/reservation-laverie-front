@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import LaverieItem from './laverie-item/laverie-item';
 
 function LaverieList() {
-    const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15,16]);
+    const [items, setItems] = useState([1, 2, 3, 4]);
 
     useEffect(() => {
         async function fetchData() {
