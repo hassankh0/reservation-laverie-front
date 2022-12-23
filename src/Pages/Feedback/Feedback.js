@@ -3,6 +3,7 @@ import './Feedback.css';
 function Feedback() {
     return (
         <>
+        <h1>Feedback</h1>
         </>
     );
 }

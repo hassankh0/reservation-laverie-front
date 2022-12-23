@@ -6,7 +6,6 @@ import NavBar from '../../Components/nav-bar/Nav-bar';
 function Home() {
     return (
         <>
-        <NavBar />
         <SearchBar />
         <LaverieList />
         </>
