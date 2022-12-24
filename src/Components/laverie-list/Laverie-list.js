@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import LaverieItem from './laverie-item/laverie-item';
 
 function LaverieList() {
-    const [items, setItems] = useState([1, 2, 3, 4]);
+    const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7]);
 
     useEffect(() => {
         async function fetchData() {
@@ -15,15 +15,13 @@ function LaverieList() {
     }, []);
 
     return (
-        <div className=" p-4 mb-4 d-flex align-items-center flex-column  w-100">
-            <div className="container-fluid w-100">
-                <div className="card-group w-100">
-                    {items.map((item) => (
-                        <LaverieItem key={item.id} />
-                    ))
-                    }
+        <div className="row p-5">
+            {items.map((item) => (
+                <div className="col-3 mb-4">
+                    <LaverieItem key={item.id} />
                 </div>
-            </div>
+            ))
+            }
         </div>
     );
 }
