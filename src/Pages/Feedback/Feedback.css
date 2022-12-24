@@ -1,0 +1,41 @@
+button:hover {
+    background:  #5bc0de  ;
+}
+
+button{
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background:  #0275d8 ;
+    border: 1px solid #0275d8;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.app {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    background-color: #f8f9fd;
+  }
+
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+  }
+
+input{
+    width:25%;
+}
+
+textarea{
+    width:50%;
+}
