@@ -9,15 +9,10 @@ import Feedback from '../../Pages/Feedback/Feedback';
 
 function Home() {
     return (
-        /*
         <>
         <SearchBar />
         <LaverieList />
         </>
-        */
-       <>
-       <Feedback />
-       </>
     );
 }
 
