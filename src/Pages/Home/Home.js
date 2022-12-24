@@ -3,13 +3,22 @@ import LaverieList from '../../Components/laverie-list/Laverie-list';
 import './Home.css';
 import NavBar from '../../Components/nav-bar/Nav-bar';
 
+//
+import Feedback from '../../Pages/Feedback/Feedback';
+//
+
 function Home() {
     return (
+        /*
         <>
         <NavBar />
         <SearchBar />
         <LaverieList />
         </>
+        */
+       <>
+       <Feedback />
+       </>
     );
 }
 
