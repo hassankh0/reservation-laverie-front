@@ -29,7 +29,7 @@ function Home() {
     return (
         <>
             <SearchBar setSearchTerm={setSearchTerm}/>
-            <LaverieList laveries={laveries.filter(item => item.nom.includes(searchTerm))} />
+            <LaverieList laveries={laveries.filter(item => item.nom.toLowerCase().includes(searchTerm.toLowerCase()))} />
         </>
     );
 }
