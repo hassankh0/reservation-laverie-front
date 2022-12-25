@@ -1,13 +1,28 @@
 import './laverie-item.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import logo from '../../../logo.svg'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-function LaverieItem() {
+
+LaverieItem.propTypes = {
+    laverie: PropTypes.shape({
+        nom: PropTypes.string.isRequired,
+        id: PropTypes.number,
+    }).isRequired,
+}
+
+function LaverieItem({ laverie }) {
+    const nom = laverie.nom;
+    const url = `../../../assets/${laverie.nom}.jpg`;
     return (
+        <Link className="Link" to={`/reservation/${laverie.id}`}>
         <div className="card">
-            <img src={logo} alt="..." />
-                <h4>Laverie-Name</h4>
+            <img src={url} className="card-img-top" alt={nom} />
+            <div className="card-body">
+                <h5 className="card-title">{nom}</h5>
+            </div>
         </div>
+        </Link>
     );
 }
 

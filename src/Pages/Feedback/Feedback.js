@@ -1,3 +1,4 @@
+import NavBar from '../../Components/nav-bar/Nav-bar';
 import './Feedback.css';
 import { useState } from 'react';
 
