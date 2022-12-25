@@ -92,7 +92,6 @@ export default function Connexion({ setToken }) {
 
 
     return (
-
         <div className="app">
             <div className="login-form">
                 <div className="title">Connexion</div>
@@ -112,7 +111,8 @@ export default function Connexion({ setToken }) {
 
                         <Link className="w-100 btn" to={"/inscription"}>Inscription</Link>
                     </form>
-                </div> </div>
+                </div>
+            </div>
         </div>
     );
 }
