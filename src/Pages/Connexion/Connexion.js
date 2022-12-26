@@ -55,35 +55,38 @@ export default function Connexion({ setToken }) {
         pwd: "Mot de passe invalide"
     };
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-    //     var { nomUser, pwd } = document.forms[0];
+        var { nomUser, pwd } = document.forms[0];
 
-    //     // Trouver l'user
-    //     const userData = BDD.find((user) => user.utilisateur === nomUser.value);
+        // Trouver l'user
+        const userData = BDD.find((user) => user.utilisateur === nomUser.value);
 
-    //     if (userData) {
-    //         if (userData.motDePasse !== pwd.value) {
-    //             //MdP invalide
-    //             setErrorMessages({ name: "pwd", message: errors.pwd });
-    //         } else {
-    //             setIsSubmitted(true);
-    //         }
-    //     } else {
-    //         //Nom d'utilisateur invalide
-    //         setErrorMessages({ name: "nomUser", message: errors.nomUser });
-    //     }
-    // };
+        if (userData) {
+            if (userData.motDePasse !== pwd.value) {
+                //MdP invalide
+                setToken(false);
+                setErrorMessages({ name: "pwd", message: errors.pwd });
+            } else {
+                setToken(true);
+                setIsSubmitted(true);
+            }
+        } else {
+            //Nom d'utilisateur invalide
+            setToken(false);
+            setErrorMessages({ name: "nomUser", message: errors.nomUser });
+        }
+    };
 
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const token = await loginUser({
-            username,
-            password
-        });
-        setToken(token.token);
-    }
+    // const handleSubmit = async e => {
+    //     e.preventDefault();
+    //     const token = await loginUser({
+    //         username,
+    //         password
+    //     });
+    //     setToken(token.token);
+    // }
 
     const renderErrorMessage = (name) =>
         name === errorMessages.name && (

@@ -1,4 +1,4 @@
-import NavBar from '../../Components/nav-bar/Nav-bar';
+import { useNavigate } from 'react-router-dom';
 import './Feedback.css';
 import { useState } from 'react';
 
@@ -7,16 +7,20 @@ function Feedback() {
     const [nom,setNom]=useState('');
     const [email,setEmail]=useState('');
     const [suggestion,setSuggestion]=useState('');
-    //const [submit,setSubmit]=useState(false);
-
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if(nom.length!==0 && email.length!==0 && suggestion.length!==0)
         {
+            //make the api call to create the feedback
             console.log(nom,email,suggestion);
             alert("Merci pour votre aide à rendre notre application meilleure!");
         }
+        setNom('');
+        setEmail('');
+        setSuggestion('');
+        navigate("/home");
       };
     return (
         <>
