@@ -10,6 +10,7 @@ NavBar.propTypes = {
 function NavBar({ setToken }) {
     function Logout() {
         setToken(false)
+        localStorage.removeItem('user');
     }
     return (
         <>

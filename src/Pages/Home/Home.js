@@ -1,34 +1,33 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import NavBar from '../../Components/nav-bar/Nav-bar';
 import SearchBar from '../../Components/search-bar/Search-bar';
 import LaverieList from '../../Components/laverie-list/Laverie-list';
+import axios from 'axios';
 
 function Home() {
     // fetch all laverie and store them in an array
-    const laveries = [
-        { id: 1, nom: "WASH'N DRY" },
-        { id: 2, nom: "LAVERIE de la Ceze" },
-        { id: 3, nom: "LAVERIE LAFAYETTE" },
-        { id: 4, nom: "LAVERIE DE FRANCE" },
-        { id: 5, nom: "REVOLUTION" },
-        { id: 6, nom: "LAVAGE AFFAIRE" },
-
-    ];
-
-    // filter the array from the search bar data
-
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filteredArray, setFilteredArray] = useState(laveries);
+    const [laveries, setLaveries] = useState([]);
 
     useEffect(()=>{
-        setFilteredArray(laveries.filter(item => item.id === searchTerm));
-    },[searchTerm]);
+        axios.get('http://localhost:5000/laverie')
+            .then(response => {
+                console.log(response.data); 
+                setLaveries(response.data);
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    },[]);
+
+    // filter the array from the search bar data
+    const [searchTerm, setSearchTerm] = useState('');
 
     // send the filtred array to the list
     return (
         <>
-            <SearchBar setSearchTerm={setSearchTerm}/>
+            <SearchBar setSearchTerm={setSearchTerm} />
             <LaverieList laveries={laveries.filter(item => item.nom.toLowerCase().includes(searchTerm.toLowerCase()))} />
         </>
     );
