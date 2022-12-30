@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -8,18 +8,22 @@ function timeToFloat(time) {
 }
 
 function Reservation() {
-    let { id } = useParams();
-    const idPersonne = window.localStorage.getItem('userId');
     //get laverie by id
-    //make reservation
+    let { id } = useParams();
+
+    const idPersonne = window.localStorage.getItem('userId');
     const [hd, setHD] = useState('');
     const [hf, setHF] = useState('');
     const [isAvailableDate, setIsAvailableDate] = useState(false);
     const [selectedMachine, setSelectedMachine] = useState('');
     const [availableMachines, setAvailableMachines] = useState([]);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/machine')
+    function getMachines() {
+        const idLaverie = id;
+        let hDebut = timeToFloat(hd);
+        let hFin = timeToFloat(hf);
+        axios.get('http://localhost:5000/machine', { params: { idLaverie: idLaverie, hDebut: hDebut, hFin: hFin } })
             .then(response => {
                 console.log(response.data);
                 setAvailableMachines(response.data);
@@ -28,8 +32,7 @@ function Reservation() {
             .catch(error => {
                 console.error(error);
             });
-    }, [isAvailableDate]);
-
+    }
 
     const handleChange = (event) => {
         setSelectedMachine(event.target.value);
@@ -44,9 +47,18 @@ function Reservation() {
     }
 
     useEffect(() => {
-        setIsAvailableDate(!(hd === '') && !(hf === ''));
-    }, [hd,hf]);
+        if (!(hd === '') && !(hf === '')) {
+            getMachines();
+        }
+    }, [hd]);
 
+    useEffect(() => {
+        if (!(hd === '') && !(hf === '')) {
+            getMachines();
+        }
+    }, [hf]);
+
+    //make reservation
     function handleSubmit(event) {
         let idMachine = selectedMachine;
         let hDebut = timeToFloat(hd);
@@ -60,6 +72,8 @@ function Reservation() {
             hFin
 
         });
+        alert(`Votre Reservation de ${hd} à ${hf} a bien été pris en compte `);
+        navigate('/home');
     }
 
     return (
@@ -76,9 +90,9 @@ function Reservation() {
                             <label>Heure fin</label>
                             <input type="time" className="form-control" value={hf} onChange={handleHFChange} required />
                         </div>
-                        {isAvailableDate ?
+                        {(!(hd === '') && !(hf === '')) ?
                             <div className="input-container">
-
+                                <label>Machines avilable</label>
                                 <select className="form-select" onChange={handleChange}>
                                     <option value={''}>{''}</option>
                                     {availableMachines.map((option) => (
