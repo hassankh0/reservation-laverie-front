@@ -81,19 +81,19 @@ class machineControllers {
                   if (err) throw err;
                   console.log(`connected as id ${connection.threadId}`);
                   console.log(req.query)
-                  connection.query(`SELECT * FROM reservation, machine
-                                    WHERE idMachine = id_machine And id_laverie = ?
-                                    AND NOT ((hDebut > ? AND hFin < ?)
+                  connection.query(`SELECT * FROM machine, (select * from laverie.reservation where not (hDebut > ? AND hFin < ?)
                                     Or(hDebut > ? AND hFin > ? AND hDebut < ?)
                                     OR(hDebut < ? AND hFin > ? AND hDebut < ? AND hFin > ?)
-                                    OR(hDebut < ? AND hFin > ?  AND hFin < ?)); `,
-                                    [req.query.idLaverie,
-                                          req.query.hDebut, req.query.hFin,
+                                    OR(hDebut < ? AND hFin > ?  AND hFin < ?)) as t
+                                    where id_machine != idMachine and  id_laverie = ? ; `,
+                                    [req.query.hDebut, req.query.hFin,
                                            req.query.hDebut, req.query.hFin, req.query.hFin,
                                             req.query.hDebut, req.query.hDebut, req.query.hFin, req.query.hFin,
-                                             req.query.hDebut, req.query.hDebut, req.query.hFin], (err, rows) => {
+                                             req.query.hDebut, req.query.hDebut, req.query.hFin,
+                                              req.query.idLaverie], (err, rows) => {
                         connection.release(); // return the connection to pool
                         if (!err) {
+                              console.log(rows)
                               res.json(rows)
                         } else {
                               console.log(err);
